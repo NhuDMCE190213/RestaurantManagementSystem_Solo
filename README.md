@@ -208,9 +208,3 @@ VITE_API_BASE_URL=http://localhost:5000/api
 
 - Solo Developer: NhuDMCE190213
 - GitHub: [https://github.com/NhuDMCE190213](https://github.com/NhuDMCE190213)
-
----
-
-Nếu bạn muốn, có thể tách README này thành 2 bản:
-- Bản gọn cho recruiter/demo
-- Bản kỹ thuật cho developer
