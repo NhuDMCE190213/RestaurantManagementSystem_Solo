@@ -12,7 +12,8 @@ Liệt kê các công cụ ngoài được dùng trong dự án để thống nh
 
 ## 3. Công cụ phát triển
 
-- Visual Studio Code
+- Visual Studio Code (front end)
+- Visual Studio (Backend)
 - Git
 - Docker Desktop (tùy chọn cho local services)
 
