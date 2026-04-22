@@ -203,6 +203,11 @@ VITE_API_BASE_URL=http://localhost:5000/api
 - API docs: Swagger tại `/swagger`
 - Kiến trúc chi tiết: `docs/architecture.md`
 - Quy trình phát triển: `docs/development-workflow.md`
+- Convention Backend: `docs/backend-conventions.md`
+- Convention Frontend: `docs/frontend-conventions.md`
+- Convention Database: `docs/db-conventions.md`
+- Quy trình GitHub: `docs/git-workflow.md`
+- Công cụ sử dụng: `docs/tooling.md`
 
 ## 12. Tác giả
 
