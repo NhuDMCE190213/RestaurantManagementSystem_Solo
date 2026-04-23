@@ -209,6 +209,7 @@ VITE_API_BASE_URL=http://localhost:5000/api
 - Package matrix: `docs/packages.md`
 - Quy trình GitHub: `docs/git-workflow.md`
 - Công cụ sử dụng: `docs/tooling.md`
+- Công việc tiếp theo: `docs/next-steps.md`
 - UX flow: `docs/ux-flow.md`
 - UI components checklist: `docs/ui-components-checklist.md`
 - UI style guide: `docs/ui-style-guide.md`
