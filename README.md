@@ -206,6 +206,7 @@ VITE_API_BASE_URL=http://localhost:5000/api
 - Convention Backend: `docs/backend-conventions.md`
 - Convention Frontend: `docs/frontend-conventions.md`
 - Convention Database: `docs/db-conventions.md`
+- Package matrix: `docs/packages.md`
 - Quy trình GitHub: `docs/git-workflow.md`
 - Công cụ sử dụng: `docs/tooling.md`
 - UX flow: `docs/ux-flow.md`
