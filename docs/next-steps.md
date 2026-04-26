@@ -26,54 +26,65 @@ Tài liệu này liệt kê các công việc cần làm tiếp theo theo thứ 
 - [x] Tạo endpoint health check (`/health`)
 - [x] Kiểm tra Swagger chạy được và gọi thử endpoint
 
-## 4. Việc cần làm trong milestone 1 (P1)
+## 4. Trục chính hệ thống
 
-- [ ] Thiết kế schema người dùng, role, quyền cơ bản
-- [ ] Xây dựng luồng Auth: login, refresh token, logout
-- [ ] Bảo vệ endpoint bằng `[Authorize]` và role policy
+Trục chính của hệ thống là luồng bán hàng Order: tạo order -> thêm món -> tính tiền -> thanh toán -> lưu lịch sử.
+
+Các milestone bên dưới ưu tiên trực tiếp cho trục này, không làm dàn trải.
+
+## 5. Việc cần làm trong milestone 1 (P1) - Xây dựng Order core
+
+- [ ] Thiết kế schema người dùng, role, quyền cơ bản (mức đủ dùng cho đăng nhập)
+- [ ] Xây dựng Auth tối thiểu cho vận hành Order: login, refresh token, logout
+- [ ] Thiết kế schema cốt lõi cho Order: order, order_item, table (hoặc dining_table)
+- [ ] Xây dựng API tạo order và thêm/xóa/cập nhật order item
+- [ ] Xây dựng logic tính subtotal, tax, discount, total cho order
+- [ ] Xây dựng API đổi trạng thái order (open, paid, cancelled)
+- [ ] Bảo vệ endpoint bằng Authorize và role policy cơ bản (Admin/Staff)
 - [ ] Chuẩn hóa response lỗi/thành công theo convention
 - [ ] Thêm global exception middleware
-- [ ] Viết unit test cho use case Auth
-- [ ] Viết integration test cho endpoint đăng nhập
+- [ ] Viết unit test cho use case Order core và Auth tối thiểu
+- [ ] Viết integration test cho endpoint login và order flow cơ bản
 
-## 5. Việc cần làm sau khi có Auth (P2)
+## 6. Việc cần làm trong milestone 2 (P2) - Hoàn thiện nghiệp vụ liên quan
 
 - [ ] Module Category
 - [ ] Module Menu Item
-- [ ] Module Table Management
-- [ ] Module Order
-- [ ] Module Invoice/Billing
-- [ ] Seed dữ liệu mẫu để test luồng end-to-end
+- [ ] Module Table Management đầy đủ
+- [ ] Module Invoice/Billing chi tiết
+- [ ] Seed dữ liệu mẫu đủ để test end-to-end cho luồng Order
 
-## 6. Frontend song song
+## 7. Frontend song song (ưu tiên theo Order)
 
 - [ ] Khởi tạo app TypeScript (React + Vite)
 - [ ] Thiết lập router + layout khung
 - [ ] Thiết lập API client và interceptor JWT
 - [ ] Làm màn hình Login
-- [ ] Làm màn hình Table Management
-- [ ] Làm màn hình POS/Order
+- [ ] Làm màn hình POS/Order (ưu tiên cao nhất)
 - [ ] Làm màn hình Checkout
+- [ ] Làm màn hình Table Management
 
-## 7. Chất lượng và vận hành
+## 8. Chất lượng và vận hành
 
 - [ ] Bật lint/format cho backend và frontend
 - [ ] Thiết lập CI GitHub Actions: restore + build + test
 - [ ] Viết nhật ký phát triển theo ngày
 - [ ] Cập nhật tài liệu khi có thay đổi kiến trúc/package
 
-## 8. Definition of Done cho mỗi task
+## 9. Definition of Done cho mỗi task
 
 - [ ] Build pass
 - [ ] Test liên quan pass
 - [ ] Không thêm warning nghiêm trọng
 - [ ] Đúng convention backend/frontend
 - [ ] Có cập nhật docs nếu thay đổi hành vi
+- [ ] Không làm gãy luồng Order end-to-end
 
-## 9. Gợi ý thứ tự commit
+## 10. Gợi ý thứ tự commit (tập trung Order)
 
-1. chore(setup): fix package versions and build
-2. feat(core): add DbContext and infrastructure DI
-3. feat(auth): implement JWT login and refresh flow
-4. test(auth): add unit and integration tests
-5. docs(next-steps): update progress checklist
+1. feat(auth): auth tối thiểu cho hệ thống (login, refresh, logout)
+2. feat(order-schema): thêm schema order core và migration
+3. feat(order-api): API tạo và cập nhật order/order item
+4. feat(order-calc): logic tính tiền order (subtotal, tax, discount, total)
+5. test(order): unit và integration test cho auth + order flow cơ bản
+6. docs(next-steps): cập nhật tiến độ theo trục Order
