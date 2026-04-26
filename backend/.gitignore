@@ -8,4 +8,4 @@ TestResults/
 *.pdb
 appsettings.Development.json
 .env
-.env.*
+!.env.example

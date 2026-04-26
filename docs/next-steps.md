@@ -19,8 +19,8 @@ Tài liệu này liệt kê các công việc cần làm tiếp theo theo thứ 
 
 - [x] Restore và build toàn bộ solution
 - [x] Xử lý toàn bộ lỗi package/version conflict
-- [ ] Cấu hình JWT trong API
-- [ ] Cấu hình CORS theo môi trường local
+- [x] Cấu hình JWT trong API
+- [x] Cấu hình CORS theo môi trường local
 - [ ] Tạo DbContext và đăng ký DI cho Infrastructure
 - [ ] Tạo migration đầu tiên và update database
 - [ ] Tạo endpoint health check (`/health`)
