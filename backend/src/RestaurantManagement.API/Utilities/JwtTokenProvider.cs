@@ -1,19 +1,11 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using RestaurantManagement.Application.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
 namespace RestaurantManagement.API.Utilities
 {
-    /// <summary>
-    /// Cung cấp các phương thức để tạo JWT token và refresh token
-    /// </summary>
-    public interface IJwtTokenProvider
-    {
-        string GenerateToken(Guid userId, string email, string userName, string role);
-        string GenerateRefreshToken();
-    }
-
     public class JwtTokenProvider : IJwtTokenProvider
     {
         private readonly IConfiguration _configuration;

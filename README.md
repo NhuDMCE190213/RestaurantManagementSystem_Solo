@@ -213,6 +213,7 @@ VITE_API_BASE_URL=http://localhost:5000/api
 - UX flow: `docs/ux-flow.md`
 - UI components checklist: `docs/ui-components-checklist.md`
 - UI style guide: `docs/ui-style-guide.md`
+- Entity workflow: `docs/new-entity-workflow.md`
 
 ## 12. Tác giả
 

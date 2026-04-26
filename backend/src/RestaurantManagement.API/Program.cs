@@ -1,6 +1,9 @@
 ﻿using DotNetEnv;
 using Microsoft.IdentityModel.Tokens;
 using RestaurantManagement.API.Utilities;
+using RestaurantManagement.Application.Interfaces;
+using RestaurantManagement.Infrastructure;
+using RestaurantManagement.Infrastructure.Seed;
 using System.Text;
 
 // Tải các biến môi trường từ file .env vào ứng dụng
@@ -10,6 +13,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Thêm các dịch vụ vào container.
 builder.Services.AddControllers();
+builder.Services.AddInfrastructure(builder.Configuration); // Đăng ký các dịch vụ liên quan đến cơ sở dữ liệu và repository từ lớp Infrastructure
+
+// Thêm các dịch vụ cho Swagger/OpenAPI để tự động tạo tài liệu API và giao diện người dùng để thử nghiệm API
 builder.Services.AddSwaggerGen();
 builder.Services.AddOpenApi();
 
@@ -55,6 +61,15 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+
+// Seed dữ liệu mẫu vào cơ sở dữ liệu khi ứng dụng khởi động. Điều này sẽ giúp có dữ liệu để kiểm thử API ngay sau khi chạy ứng dụng.
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<AppDbContext>();
+    await DbSeeder.SeedAsync(context);
+}
 
 // Cấu hình pipeline HTTP.
 if (app.Environment.IsDevelopment())

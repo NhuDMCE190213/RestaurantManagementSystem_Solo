@@ -21,10 +21,10 @@ Tài liệu này liệt kê các công việc cần làm tiếp theo theo thứ 
 - [x] Xử lý toàn bộ lỗi package/version conflict
 - [x] Cấu hình JWT trong API
 - [x] Cấu hình CORS theo môi trường local
-- [ ] Tạo DbContext và đăng ký DI cho Infrastructure
-- [ ] Tạo migration đầu tiên và update database
-- [ ] Tạo endpoint health check (`/health`)
-- [ ] Kiểm tra Swagger chạy được và gọi thử endpoint
+- [x] Tạo DbContext và đăng ký DI cho Infrastructure
+- [x] Tạo migration đầu tiên và update database
+- [x] Tạo endpoint health check (`/health`)
+- [x] Kiểm tra Swagger chạy được và gọi thử endpoint
 
 ## 4. Việc cần làm trong milestone 1 (P1)
 

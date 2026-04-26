@@ -1,7 +1,5 @@
-﻿
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using RestaurantManagement.API.Utilities;
+﻿using Microsoft.AspNetCore.Mvc;
+using RestaurantManagement.Application.Interfaces;
 
 namespace RestaurantManagement.API.Controllers
 {
@@ -40,6 +38,8 @@ namespace RestaurantManagement.API.Controllers
             // Tạo JWT token và refresh token
             var accessToken = _jwtTokenProvider.GenerateToken(userId, email, userName, role);
             var refreshToken = _jwtTokenProvider.GenerateRefreshToken();
+
+
             // Trả về token và refresh token cho client
             return Ok(new LoginResponse
             {
