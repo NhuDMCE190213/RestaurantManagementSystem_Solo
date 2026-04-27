@@ -1,10 +1,11 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using RestaurantManagement.Application.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace RestaurantManagement.API.Utilities
+namespace RestaurantManagement.Infrastructure.Security
 {
     public class JwtTokenProvider : IJwtTokenProvider
     {

@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RestaurantManagement.Application.Interfaces;
+using RestaurantManagement.Infrastructure.Persistence;
+using RestaurantManagement.Infrastructure.Security;
 
 namespace RestaurantManagement.Infrastructure
 {
@@ -18,6 +21,9 @@ namespace RestaurantManagement.Infrastructure
                 options.UseNpgsql(connectionString); // Sử dụng PostgreSQL làm database provider
                 options.UseSnakeCaseNamingConvention(); // Sử dụng quy tắc đặt tên snake_case cho các bảng và cột trong database
             });
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IJwtTokenProvider, JwtTokenProvider>();
 
             return services;
         }

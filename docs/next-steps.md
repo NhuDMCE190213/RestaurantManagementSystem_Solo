@@ -36,7 +36,7 @@ Các milestone bên dưới ưu tiên trực tiếp cho trục này, không làm
 
 - [ ] Thiết kế schema người dùng, role, quyền cơ bản (mức đủ dùng cho đăng nhập)
 - [ ] Xây dựng Auth tối thiểu cho vận hành Order: login, refresh token, logout
-- [ ] Thiết kế schema cốt lõi cho Order: order, order_item, table (hoặc dining_table)
+- [x] Thiết kế schema cốt lõi cho Order: order, order_item, table (hoặc dining_table)
 - [ ] Xây dựng API tạo order và thêm/xóa/cập nhật order item
 - [ ] Xây dựng logic tính subtotal, tax, discount, total cho order
 - [ ] Xây dựng API đổi trạng thái order (open, paid, cancelled)

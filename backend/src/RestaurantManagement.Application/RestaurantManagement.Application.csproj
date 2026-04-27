@@ -18,4 +18,11 @@
     <ProjectReference Include="..\RestaurantManagement.Domain\RestaurantManagement.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Orders\Commands\DeleteOrder\" />
+    <Folder Include="Features\Orders\Commands\UpdateOrder\" />
+    <Folder Include="Features\Orders\Queries\GetOrder\" />
+    <Folder Include="Features\Orders\Queries\GetAllOrders\" />
+  </ItemGroup>
+
 </Project>

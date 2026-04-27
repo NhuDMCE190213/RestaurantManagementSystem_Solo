@@ -1,4 +1,5 @@
 ﻿using RestaurantManagement.Domain.BaseEntities;
+using RestaurantManagement.Domain.Enums;
 
 namespace RestaurantManagement.Domain.Entities
 {
@@ -6,45 +7,66 @@ namespace RestaurantManagement.Domain.Entities
     {
         public Guid OrderId { get; set; }
         public Guid? CustomerId { get; set; }   // Có thể null nếu nhân viên tạo đơn hàng cho khách vãng lai
-        public double Tax { get; set; }
-        public double Discount { get; set; }
-        public double SubTotal { get; set; }
-        public double TotalAmount { get; set; }
+        public Guid? TableId { get; set; }      // Có thể null nếu đơn hàng mang đi
+        public decimal Tax { get; set; }
+        public decimal Discount { get; set; }
+        public decimal SubTotal { get; set; }
+        public decimal TotalAmount { get; set; }
+        public OrderStatus OrderStatus { get; set; }
 
-        public Order AddOrder(Guid? customerId, Guid employeeId)
+        public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>(); // Quan hệ một-nhiều với OrderItem
+        public virtual Table? Table { get; set; } // Quan hệ nhiều-một với Table
+
+        public static Order Create(Guid? customerId, Guid? tableId, Guid employeeId)
         {
             var order = new Order
             {
                 OrderId = Guid.NewGuid(),
                 CustomerId = customerId,
+                TableId = tableId,
+                OrderStatus = OrderStatus.Pending,
                 CreatedBy = employeeId,
                 CreatedAt = DateTime.UtcNow
             };
             return order;
         }
 
-        public void UpdateOrder(Guid? customerId, Guid employeeId)
+        public void UpdateOrder(Guid? customerId, Guid? tableId, OrderStatus orderStatus, Guid employeeId)
         {
             CustomerId = customerId;
+            TableId = tableId;
+            OrderStatus = orderStatus;
             UpdatedBy = employeeId;
             UpdatedAt = DateTime.UtcNow;
         }
 
         public void DeleteOrder(Guid employeeId)
-        { 
-            UpdatedBy = employeeId;
-            UpdatedAt = DateTime.UtcNow;
+        {
+            OrderStatus = OrderStatus.Inactive;
+            DeletedBy = employeeId;
+            DeletedAt = DateTime.UtcNow;
         }
 
-        public void CalculateTax()
+
+        /// <summary>
+        /// Phương thức này sẽ được gọi mỗi khi có sự thay đổi liên quan đến OrderItems (thêm, sửa, xóa)
+        /// \để tự động cập nhật lại các giá trị Tax, Discount, SubTotal và TotalAmount của đơn hàng.
+        /// </summary>
+        private void CalculateTax()
         {
-            Tax = SubTotal * 0.1; // Ví dụ tính thuế 10% trên SubTotal
+            Tax = SubTotal * Constants.TaxConstants.DefaultVatRate; // Tính thuế dựa trên hằng số
         }
-        public void CalculateSubTotal()
+        /// <summary>
+        /// Phương thức này sẽ được gọi mỗi khi có sự thay đổi liên quan đến OrderItems (thêm, sửa, xóa)
+        /// </summary>
+        private void CalculateSubTotal()
         {
-            SubTotal = 0; // Logic tính toán SubTotal dựa trên các OrderItem sẽ được thêm vào sau
+            SubTotal = OrderItems.Sum(item => item.CalculateTotalPrice()); // Logic tính toán SubTotal dựa trên các OrderItem
         }
-        public void CalculateDiscount()
+        /// <summary>
+        /// Phương thức này sẽ được gọi mỗi khi có sự thay đổi liên quan đến OrderItems (thêm, sửa, xóa)
+        /// </summary>
+        private void CalculateDiscount()
         {
             Discount = 0; // Logic tính toán giảm giá dựa trên các chương trình khuyến mãi hoặc mã giảm giá
         }
