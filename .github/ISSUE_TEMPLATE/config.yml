@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: "📚 Hỏi câu hỏi chung"
+    url: "https://github.com/your-user/RestaurantManagementSystem_Solo/discussions"
+    about: "Nếu bạn có câu hỏi chung, vui lòng tìm kiếm hoặc tạo discussion"
+  - name: "📖 Xem tài liệu"
+    url: "https://github.com/your-user/RestaurantManagementSystem_Solo/tree/main/docs"
+    about: "Xem tài liệu kỹ thuật trong thư mục docs"
