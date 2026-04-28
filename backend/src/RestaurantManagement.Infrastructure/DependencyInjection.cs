@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RestaurantManagement.Application.Interfaces;
 using RestaurantManagement.Infrastructure.Persistence;
+using RestaurantManagement.Infrastructure.Persistence.Repositories;
 using RestaurantManagement.Infrastructure.Security;
 
 namespace RestaurantManagement.Infrastructure
@@ -23,6 +24,7 @@ namespace RestaurantManagement.Infrastructure
             });
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IJwtTokenProvider, JwtTokenProvider>();
 
             return services;

@@ -11,6 +11,7 @@ namespace RestaurantManagement.Application.Common
         {
             IsSuccess = isSuccess;
             Value = value;
+            ErrorCode = errorCode;
             Message = message;
         }
 
