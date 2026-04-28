@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using RestaurantManagement.Application.Common;
 using RestaurantManagement.Application.Interfaces;
-using RestaurantManagement.Domain.Constants;
+using RestaurantManagement.Domain.Constants.ErrorCodes;
 using RestaurantManagement.Domain.Entities;
 using RestaurantManagement.Domain.Enums;
 
@@ -22,13 +22,13 @@ namespace RestaurantManagement.Application.Features.Orders.Commands.CreateOrder
         {
             if (request.OrderItems is null || request.OrderItems.Count == 0)
             {
-                return Result<CreateOrderResponse>.Failure(ErrorCodes.ValidationError, "Order must contain at least one item.");
+                return Result<CreateOrderResponse>.Failure(OrderErrorCodes.InvalidOrderItems, "Order must contain at least one item.");
             }
 
             // Hiện tại chưa có login nên tạm thời để EmployeeId là bắt buộc, sau này có thể sửa lại khi có hệ thống authentication
             if (request.EmployeeId == Guid.Empty)
             {
-                return Result<CreateOrderResponse>.Failure(ErrorCodes.ValidationError, "EmployeeId is required.");
+                return Result<CreateOrderResponse>.Failure(AuthErrorCodes.InvalidEmployeeId, "EmployeeId is required.");
             }
 
             var order = Order.Create(request.CustomerId, request.TableId, request.EmployeeId);
