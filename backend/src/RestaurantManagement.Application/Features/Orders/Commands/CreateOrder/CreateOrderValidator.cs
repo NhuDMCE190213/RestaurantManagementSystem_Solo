@@ -8,7 +8,7 @@ namespace RestaurantManagement.Application.Features.Orders.Commands.CreateOrder
         {
             RuleFor(x => x.EmployeeId)          // Hiện tại chưa có login nên tạm thời để EmployeeId là bắt buộc, sau này có thể sửa lại khi có hệ thống authentication
                 .NotEmpty()
-                .WithMessage("EmployeeId is required.");        
+                .WithMessage("EmployeeId is required.");
 
             RuleFor(x => x.OrderItems)
                 .NotNull()
