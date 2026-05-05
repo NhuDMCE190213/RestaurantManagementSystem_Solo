@@ -3,8 +3,6 @@ using RestaurantManagement.Application.Interfaces;
 
 namespace RestaurantManagement.API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
     public class AuthController : ControllerBase
     {
         private readonly IJwtTokenProvider _jwtTokenProvider;

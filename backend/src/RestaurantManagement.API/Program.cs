@@ -1,5 +1,6 @@
 ﻿using DotNetEnv;
 using Microsoft.IdentityModel.Tokens;
+using RestaurantManagement.Application;
 using RestaurantManagement.Infrastructure;
 using RestaurantManagement.Infrastructure.Seed;
 using System.Text;
@@ -15,6 +16,7 @@ internal class Program
 
         // Thêm các dịch vụ vào container.
         builder.Services.AddControllers();
+        builder.Services.AddApplication(); // Đăng ký các dịch vụ từ lớp Application, bao gồm MediatR, AutoMapper và FluentValidation
         builder.Services.AddInfrastructure(builder.Configuration); // Đăng ký các dịch vụ liên quan đến cơ sở dữ liệu và repository từ lớp Infrastructure
 
         // Thêm các dịch vụ cho Swagger/OpenAPI để tự động tạo tài liệu API và giao diện người dùng để thử nghiệm API

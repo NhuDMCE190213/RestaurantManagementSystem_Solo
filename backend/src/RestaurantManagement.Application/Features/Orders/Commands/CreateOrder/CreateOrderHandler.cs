@@ -20,11 +20,6 @@ namespace RestaurantManagement.Application.Features.Orders.Commands.CreateOrder
 
         public async Task<Result<CreateOrderResponse>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
-            if (request.OrderItems is null || request.OrderItems.Count == 0)
-            {
-                return Result<CreateOrderResponse>.Failure(OrderErrorCodes.InvalidOrderItems, "Order must contain at least one item.");
-            }
-
             // Hiện tại chưa có login nên tạm thời để EmployeeId là bắt buộc, sau này có thể sửa lại khi có hệ thống authentication
             if (request.EmployeeId == Guid.Empty)
             {
@@ -35,15 +30,7 @@ namespace RestaurantManagement.Application.Features.Orders.Commands.CreateOrder
 
             foreach (var item in request.OrderItems)
             {
-                var orderItem = OrderItem.Create(
-                    order.OrderId,
-                    item.MenuItemId,
-                    item.Quantity,
-                    item.UnitPrice,
-                    OrderItemStatus.Pending,
-                    request.EmployeeId);
-
-                order.OrderItems.Add(orderItem);
+                order.AddOrUpdateOrderItem(item.MenuItemId, item.Quantity, item.UnitPrice, OrderItemStatus.Pending, request.EmployeeId);
             }
 
             order.CalculateTotalAmount();

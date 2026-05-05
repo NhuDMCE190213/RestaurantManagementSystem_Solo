@@ -78,5 +78,20 @@ namespace RestaurantManagement.Domain.Entities
 
             TotalAmount = SubTotal + Tax - Discount;
         }
+
+        public void AddOrUpdateOrderItem(Guid menuItemId, int quantity, decimal unitPrice, OrderItemStatus status, Guid employeeId)
+        {
+            var existingItem = OrderItems.FirstOrDefault(i => i.MenuItemId == menuItemId && i.OrderItemStatus == OrderItemStatus.Pending);
+            if (existingItem != null)
+            {
+                existingItem.UpdateOrderItem(quantity, unitPrice, status, employeeId);
+            }
+            else
+            {
+                var newItem = OrderItem.Create(OrderId, menuItemId, quantity, unitPrice, status, employeeId);
+                OrderItems.Add(newItem);
+            }
+            CalculateTotalAmount(); // Cập nhật lại tổng tiền sau khi thêm/sửa OrderItem
+        }
     }
 }
