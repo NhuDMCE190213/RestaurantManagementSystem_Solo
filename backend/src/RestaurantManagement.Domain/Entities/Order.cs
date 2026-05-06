@@ -31,11 +31,8 @@ namespace RestaurantManagement.Domain.Entities
             return order;
         }
 
-        public void UpdateOrder(Guid? customerId, Guid? tableId, OrderStatus orderStatus, Guid employeeId)
+        public void UpdateOrder(Guid employeeId)
         {
-            CustomerId = customerId;
-            TableId = tableId;
-            OrderStatus = orderStatus;
             UpdatedBy = employeeId;
             UpdatedAt = DateTime.UtcNow;
         }
@@ -92,6 +89,23 @@ namespace RestaurantManagement.Domain.Entities
                 OrderItems.Add(newItem);
             }
             CalculateTotalAmount(); // Cập nhật lại tổng tiền sau khi thêm/sửa OrderItem
+        }
+
+        public bool CanChangeStatus(OrderStatus newStatus)
+        {
+            return OrderStatus switch
+            {
+                OrderStatus.Pending => newStatus == OrderStatus.Preparing || newStatus == OrderStatus.Cancelled,
+                OrderStatus.Preparing => newStatus == OrderStatus.Served || newStatus == OrderStatus.Cancelled,
+                OrderStatus.Served => false, // Không thể thay đổi trạng thái sau khi đã phục vụ
+                OrderStatus.Cancelled => false, // Không thể thay đổi trạng thái sau khi đã hủy
+                _ => false
+            };
+        }
+
+        public bool CanUpdateOrderItems()
+        {
+            return OrderStatus == OrderStatus.Pending || OrderStatus == OrderStatus.Preparing;
         }
     }
 }

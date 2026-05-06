@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <Folder Include="Features\Orders\Commands\DeleteOrder\" />
-    <Folder Include="Features\Orders\Commands\UpdateOrder\" />
     <Folder Include="Features\Orders\Queries\GetOrder\" />
     <Folder Include="Features\Orders\Queries\GetAllOrders\" />
   </ItemGroup>

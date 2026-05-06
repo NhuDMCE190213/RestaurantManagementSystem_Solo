@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RestaurantManagement.Application.Features.Orders.Commands.CreateOrder;
+using RestaurantManagement.Application.Features.Orders.Commands.UpdateOrder;
 
 namespace RestaurantManagement.API.Controllers
 {
@@ -26,6 +27,18 @@ namespace RestaurantManagement.API.Controllers
             }
 
             return CreatedAtAction(nameof(CreateOrder), new { id = result.Value.OrderId }, result.Value);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateOrder([FromBody] UpdateOrderCommand command,
+            CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(command, cancellationToken);
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result.Value);
         }
     }
 }
