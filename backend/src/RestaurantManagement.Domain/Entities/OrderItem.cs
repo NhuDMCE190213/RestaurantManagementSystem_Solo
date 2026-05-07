@@ -33,11 +33,21 @@ namespace RestaurantManagement.Domain.Entities
         {
             Quantity = quantity;
             UnitPrice = unitPrice;
-            TotalPrice = quantity * unitPrice;
+            CalculateTotalPrice();
             OrderItemStatus = orderItemStatus;
+
             UpdatedBy = employeeId;
             UpdatedAt = DateTime.UtcNow;
         }
+        public void UpdateOrderItem(int quantity, Guid employeeId)
+        {
+            Quantity = quantity;
+            CalculateTotalPrice();
+
+            UpdatedBy = employeeId;
+            UpdatedAt = DateTime.UtcNow;
+        }
+
         public void DeleteOrderItem(Guid employeeId)
         {
             OrderItemStatus = OrderItemStatus.Inactive;
@@ -49,6 +59,16 @@ namespace RestaurantManagement.Domain.Entities
         {
             TotalPrice = Quantity * UnitPrice; // Logic tính toán TotalPrice dựa trên Quantity và UnitPrice
             return TotalPrice;
+        }
+
+        public bool CanDelete()
+        {
+            return OrderItemStatus == OrderItemStatus.Pending;
+        }
+
+        public bool CanUpdate()
+        {
+            return OrderItemStatus == OrderItemStatus.Pending;
         }
     }
 }
