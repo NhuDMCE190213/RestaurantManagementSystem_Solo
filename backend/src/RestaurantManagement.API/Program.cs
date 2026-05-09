@@ -5,7 +5,7 @@ using RestaurantManagement.Infrastructure;
 using RestaurantManagement.Infrastructure.Seed;
 using System.Text;
 
-internal class Program
+public class Program
 {
     private static async Task Main(string[] args)
     {
@@ -20,7 +20,10 @@ internal class Program
         builder.Services.AddInfrastructure(builder.Configuration); // Đăng ký các dịch vụ liên quan đến cơ sở dữ liệu và repository từ lớp Infrastructure
 
         // Thêm các dịch vụ cho Swagger/OpenAPI để tự động tạo tài liệu API và giao diện người dùng để thử nghiệm API
-        builder.Services.AddSwaggerGen();
+        builder.Services.AddSwaggerGen(options =>
+        {
+            options.CustomSchemaIds(type => type.FullName); // Đảm bảo rằng các schema trong tài liệu Swagger có tên duy nhất bằng cách sử dụng tên đầy đủ của lớp, điều này giúp tránh xung đột tên khi có nhiều lớp cùng tên trong các namespace khác nhau
+        });
         builder.Services.AddOpenApi();
 
         // Cấu hình Jwt Authentication

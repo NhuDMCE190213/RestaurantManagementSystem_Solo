@@ -12,7 +12,7 @@ namespace RestaurantManagement.Infrastructure.Persistence.Repositories
         {
             _dbContext = dbContext;
         }
-        
+
         public async Task DeleteAsync(Guid orderItemId, CancellationToken cancellationToken = default)
         {
             await _dbContext.OrderItems.Where(oi => oi.OrderItemId == orderItemId).ExecuteDeleteAsync(cancellationToken);
@@ -27,4 +27,5 @@ namespace RestaurantManagement.Infrastructure.Persistence.Repositories
         {
             return await _dbContext.OrderItems.FirstOrDefaultAsync(oi => oi.OrderItemId == orderItemId, cancellationToken);
         }
+    }
 }

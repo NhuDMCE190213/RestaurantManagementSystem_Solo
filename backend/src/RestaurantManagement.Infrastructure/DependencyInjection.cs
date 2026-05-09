@@ -25,6 +25,7 @@ namespace RestaurantManagement.Infrastructure
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderItemRepository, OrderItemRepository>();
             services.AddScoped<IJwtTokenProvider, JwtTokenProvider>();
 
             return services;
